@@ -16,17 +16,21 @@ project "MyOpenGL"
 	--pchheader
 	--pchsource
 
-	includedirs { "%{prj.name}/src", "Dependencies/GLFW/include/GLFW" }
-	libdirs { "Dependencies/GLFW/lib-vc2017" }
+	includedirs { 
+	"%{prj.name}/src", "Dependencies/GLFW/include/GLFW",
+	"Dependencies/GLEW/glew-2.1.0/include/GL"
+	}
+
+	libdirs { "Dependencies/GLFW/lib-vc2017", "Dependencies/GLEW/glew-2.1.0/lib/Release/x64" }
 
 	files { "%{prj.name}/src/*.cpp"}
 
-	links { "opengl32", "glfw3" }
+	links { "opengl32", "glfw3", "glew32s" }
 
 	filter "system:windows"
 		cppdialect "C++17"
 		systemversion "latest"
-		--defines	{ "GLEW_STATIC"  }
+		defines	{ "GLEW_STATIC"  }
 	
 	filter "configurations:Debug"
 		runtime "Debug"
