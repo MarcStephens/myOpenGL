@@ -16,11 +16,12 @@ project "MyOpenGL"
 	--pchheader
 	--pchsource
 
-	--includedirs
-	
-	files { "%{prj.name}/src/**.cpp" }
+	includedirs { "%{prj.name}/src", "Dependencies/GLFW/include/GLFW" }
+	libdirs { "Dependencies/GLFW/lib-vc2017" }
 
-	-- links{"glew32s", "glfw3" , "opengl32" }
+	files { "%{prj.name}/src/*.cpp"}
+
+	links { "opengl32", "glfw3" }
 
 	filter "system:windows"
 		cppdialect "C++17"
