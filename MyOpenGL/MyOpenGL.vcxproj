@@ -95,7 +95,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\EventManager.cpp" />
+    <ClCompile Include="src\MyWindow.cpp" />
     <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\IEventHandler.h" />
+    <ClInclude Include="src\EventManager.h" />
+    <ClInclude Include="src\MyWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

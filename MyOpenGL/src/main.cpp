@@ -1,27 +1,45 @@
-#include <glew.h>
-#include <glfw3.h>
+#include <glew.h>	// Per glfw need to include this header BEFORE glfw
+#include <glfw3.h>  /* This defines all the constants, types and function prototypes of the GLFW API.  It also includes the OpenGL header from your development environment
+					   and defines all the constants and types necessary for it to work on your platform without including any platform-specific headers.  I.e:
+						- Do NOT include the OpenGL header yourself, as GLFW does this for you in a platform - independent way
+						- Do NOT include windows.h or other platform - specific headers unless you plan on using those APIs yourself
+						- If you do need to include such headers, include them BEFORE the GLFW header and it will detect this*/
+#include <iostream>
+#include "MyWindow.h"
+#include"Player.h"
+#include <functional>
+#include "EventManager.h"
+
+
+
+EventManager eventManager;   
+
+
+
+
+void key_callback(GLFWwindow * window, int key, int scancode, int action, int mods)
+{
+	{
+		if (key == 'W') {
+			eventManager.FireEvent(2);
+		}
+	}
+}
+
+
+
+
 
 int main(void)
 {
-	GLFWwindow* window;
+	MyWindow window;   // Creates the window & activates it.
+	Player player;
+	eventManager.Subscribe(&player);
 
-	/* Initialize the library */
-	if (!glfwInit())
-		return -1;
-
-	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
-	if (!window)
-	{
-		glfwTerminate();
-		return -1;
-	}
-
-	/* Make the window's context current */
-	glfwMakeContextCurrent(window);
+	glfwSetKeyCallback(window.m_window, key_callback);
 
 	/* Loop until the user closes the window */
-	while (!glfwWindowShouldClose(window))
+	while (!glfwWindowShouldClose(window.m_window))
 	{
 		/* Render here */
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -33,7 +51,7 @@ int main(void)
 		glEnd();
 
 		/* Swap front and back buffers */
-		glfwSwapBuffers(window);
+		glfwSwapBuffers(window.m_window);
 
 		/* Poll for and process events */
 		glfwPollEvents();
